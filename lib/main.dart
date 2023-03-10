@@ -1,9 +1,29 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
-import 'my_home_page.dart';
+// Package imports:
+import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+
+// Project imports:
+import 'package:flutter_test_task/home_page/bloc/home_page_bloc.dart';
+import 'home_page/home_page.dart';
+
+final getIt = GetIt.instance;
 
 void main() {
+  _initDependencies();
+
   runApp(const MyApp());
+}
+
+void _initDependencies() {
+  getIt.registerSingleton<Dio>(
+    Dio(
+      BaseOptions(baseUrl: 'https://www.massagebook.com/nxt/pu-api/v1/'),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +36,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => HomePageBloc()),
+        ],
+        child: const HomePage(),
+      ),
     );
   }
 }
-
-
