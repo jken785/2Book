@@ -23,9 +23,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on<FetchEvent>((event, emit) async {
       if (state is LoadingState) {
         return;
-      } else {
-        emit(LoadingState(coordinate: event.coordinate));
       }
+
+      emit(LoadingState(coordinate: event.coordinate));
 
       Response response;
       try {
@@ -100,11 +100,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     required Set<ServiceCategory> categories,
     required Set<Business> businesses,
   }) {
-    final filteredCateogires = categories
+    final filteredCategories = categories
         .where((c) => c.attributes.categoryType == selectedCategoryType);
 
     final filteredBusinesses = {
-      for (final category in filteredCateogires)
+      for (final category in filteredCategories)
         ...businesses.where((b) => b.categoryIds.contains(category.id))
     };
 
