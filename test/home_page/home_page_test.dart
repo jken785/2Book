@@ -1,9 +1,11 @@
 // Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -28,7 +30,7 @@ void main() {
   testWidgets('Flow test', (t) async {
     when(() => mockDio.get(any())).thenAnswer(
       (_) async => Response(
-        data: mockData,
+        data: mockJson,
         requestOptions: RequestOptions(),
         statusCode: HttpStatus.ok,
       ),

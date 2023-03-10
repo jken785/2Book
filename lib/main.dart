@@ -20,9 +20,7 @@ void main() {
 
 void _initDependencies() {
   getIt.registerSingleton<Dio>(
-    Dio(
-      BaseOptions(baseUrl: 'https://www.massagebook.com/nxt/pu-api/v1/'),
-    ),
+    Dio(BaseOptions(baseUrl: 'https://www.massagebook.com/nxt/pu-api/v1/')),
   );
 }
 

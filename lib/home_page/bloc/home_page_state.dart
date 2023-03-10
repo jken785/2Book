@@ -25,6 +25,13 @@ abstract class HomePageState extends Equatable {
     required this.categories,
   });
 
+  const HomePageState.empty({required this.status, this.coordinate})
+      : businesses = const {},
+        filteredBusinesses = const {},
+        selectedCategoryType = null,
+        categoryTypes = const {},
+        categories = const {};
+
   @override
   List<Object?> get props => [
         status,
@@ -38,34 +45,18 @@ abstract class HomePageState extends Equatable {
 }
 
 class InitialState extends HomePageState {
-  const InitialState()
-      : super(
-          status: HomePageStatus.initial,
-          coordinate: null,
-          businesses: const {},
-          filteredBusinesses: const {},
-          selectedCategoryType: null,
-          categoryTypes: const {},
-          categories: const {},
-        );
+  const InitialState() : super.empty(status: HomePageStatus.initial);
 }
 
 class LoadingState extends HomePageState {
   const LoadingState({required super.coordinate})
-      : super(
-          status: HomePageStatus.loading,
-          businesses: const {},
-          filteredBusinesses: const {},
-          selectedCategoryType: null,
-          categoryTypes: const {},
-          categories: const {},
-        );
+      : super.empty(status: HomePageStatus.loading);
 }
 
 class LoadedState extends HomePageState {
   const LoadedState({
-    required super.businesses,
     required super.coordinate,
+    required super.businesses,
     required super.filteredBusinesses,
     required super.selectedCategoryType,
     required super.categoryTypes,
@@ -75,12 +66,5 @@ class LoadedState extends HomePageState {
 
 class FailedState extends HomePageState {
   const FailedState({required super.coordinate})
-      : super(
-          status: HomePageStatus.failed,
-          businesses: const {},
-          filteredBusinesses: const {},
-          selectedCategoryType: null,
-          categoryTypes: const {},
-          categories: const {},
-        );
+      : super.empty(status: HomePageStatus.failed);
 }

@@ -10,7 +10,7 @@ import 'package:flutter_test_task/model/service_category.dart';
 
 class MockDio extends Mock implements Dio {}
 
-const mockData = {
+const mockJson = {
   "included": [
     {
       "id": "1",
@@ -70,56 +70,51 @@ const mockData = {
 };
 
 final successfulLoadedState = LoadedState(
-  businesses: {
-    const Business("123", 'Test Business 1', 'test', ['1', '2', '3']),
-    const Business("234", 'Test Business 2', 'test', ['2', '3'])
-  },
+  businesses: {business1, business2},
   coordinate: Coordinate.newYork,
-  filteredBusinesses: {
-    const Business("123", 'Test Business 1', 'test', ['1', '2', '3']),
-    const Business("234", 'Test Business 2', 'test', ['2', '3'])
-  },
+  filteredBusinesses: {business1, business2},
   selectedCategoryType: null,
-  categoryTypes: const {'Bodywork', 'Chiropractic', 'Spa'},
-  categories: {
-    const ServiceCategory(
-      '1',
-      ServiceCategoryAttributes('Service 1', 'Bodywork'),
-    ),
-    const ServiceCategory(
-      '2',
-      ServiceCategoryAttributes('Service 2', 'Spa'),
-    ),
-    const ServiceCategory(
-      '3',
-      ServiceCategoryAttributes('Service 3', 'Chiropractic'),
-    )
-  },
+  categoryTypes: categoryTypes,
+  categories: categories,
 );
 
 final successfulFilteredState = LoadedState(
-  businesses: {
-    const Business("123", 'Test Business 1', 'test', ['1', '2', '3']),
-    const Business("234", 'Test Business 2', 'test', ['2', '3'])
-  },
+  businesses: {business1, business2},
   coordinate: Coordinate.newYork,
-  filteredBusinesses: {
-    const Business("123", 'Test Business 1', 'test', ['1', '2', '3']),
-  },
+  filteredBusinesses: {business1},
   selectedCategoryType: 'Bodywork',
-  categoryTypes: const {'Bodywork', 'Chiropractic', 'Spa'},
-  categories: {
-    const ServiceCategory(
-      '1',
-      ServiceCategoryAttributes('Service 1', 'Bodywork'),
-    ),
-    const ServiceCategory(
-      '2',
-      ServiceCategoryAttributes('Service 2', 'Spa'),
-    ),
-    const ServiceCategory(
-      '3',
-      ServiceCategoryAttributes('Service 3', 'Chiropractic'),
-    )
-  },
+  categoryTypes: categoryTypes,
+  categories: categories,
 );
+
+const business1 = Business(
+  id: "123",
+  name: 'Test Business 1',
+  categoryIds: {'1', '2', '3'},
+);
+const business2 = Business(
+  id: "234",
+  name: 'Test Business 2',
+  categoryIds: {'2', '3'},
+);
+
+final categoryTypes = {'Bodywork', 'Chiropractic', 'Spa'};
+final categories = {
+  const ServiceCategory(
+    id: '1',
+    attributes:
+        ServiceCategoryAttributes(name: 'Service 1', categoryType: 'Bodywork'),
+  ),
+  const ServiceCategory(
+    id: '2',
+    attributes:
+        ServiceCategoryAttributes(name: 'Service 2', categoryType: 'Spa'),
+  ),
+  const ServiceCategory(
+    id: '3',
+    attributes: ServiceCategoryAttributes(
+      name: 'Service 3',
+      categoryType: 'Chiropractic',
+    ),
+  )
+};

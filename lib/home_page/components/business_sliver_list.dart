@@ -8,9 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_task/home_page/bloc/home_page_bloc.dart';
 
 class BusinessSliverList extends StatelessWidget {
-  const BusinessSliverList({
-    super.key,
-  });
+  const BusinessSliverList({super.key});
 
   @override
   Widget build(BuildContext context) {

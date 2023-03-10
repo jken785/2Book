@@ -4,22 +4,24 @@ import 'package:equatable/equatable.dart';
 class Business extends Equatable implements Comparable {
   final String id;
   final String name;
-  final String description;
 
-  final List<String> categoryIds;
+  final Set<String> categoryIds;
 
-  const Business(this.id, this.name, this.description, this.categoryIds);
+  const Business({
+    required this.id,
+    required this.name,
+    required this.categoryIds,
+  });
 
   factory Business.fromJson(dynamic json) {
     final categoryList =
         json['relationships']['service_categories']['data'] as List;
-    final categoryIds = categoryList.map((c) => c['id'] as String).toList();
+    final categoryIds = categoryList.map((c) => c['id'] as String).toSet();
 
     return Business(
-      json['id'],
-      json['attributes']['business_name'],
-      json['attributes']['description'],
-      categoryIds,
+      id: json['id'],
+      name: json['attributes']['business_name'],
+      categoryIds: categoryIds,
     );
   }
 
@@ -29,5 +31,5 @@ class Business extends Equatable implements Comparable {
   }
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, categoryIds];
 }

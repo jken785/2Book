@@ -38,6 +38,7 @@ class _LocationDropdownMenuState extends State<LocationDropdownMenu> {
               child: Text('Washington'),
             ),
           ],
+          // TODO: improve bloc so there's no need to disable the DropdownButton while loading
           onChanged: state.status == HomePageStatus.loading
               ? null
               : (newCoordinate) {

@@ -5,12 +5,12 @@ class ServiceCategory extends Equatable {
   final String id;
   final ServiceCategoryAttributes attributes;
 
-  const ServiceCategory(this.id, this.attributes);
+  const ServiceCategory({required this.id, required this.attributes});
 
   factory ServiceCategory.fromJson(dynamic json) {
     final attributes = ServiceCategoryAttributes.fromJson(json['attributes']);
 
-    return ServiceCategory(json['id'], attributes);
+    return ServiceCategory(id: json['id'], attributes: attributes);
   }
 
   @override
@@ -21,10 +21,16 @@ class ServiceCategoryAttributes extends Equatable {
   final String name;
   final String categoryType;
 
-  const ServiceCategoryAttributes(this.name, this.categoryType);
+  const ServiceCategoryAttributes({
+    required this.name,
+    required this.categoryType,
+  });
 
   factory ServiceCategoryAttributes.fromJson(dynamic json) {
-    return ServiceCategoryAttributes(json['name'], json['category_type']);
+    return ServiceCategoryAttributes(
+      name: json['name'],
+      categoryType: json['category_type'],
+    );
   }
 
   @override

@@ -14,10 +14,7 @@ class CategoryDropdownMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomePageBloc, HomePageState>(
-      listenWhen: (previous, current) =>
-          current.status == HomePageStatus.loaded,
-      listener: (context, state) {},
+    return BlocBuilder<HomePageBloc, HomePageState>(
       builder: (context, state) {
         switch (state.status) {
           case HomePageStatus.loaded:

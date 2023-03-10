@@ -48,7 +48,7 @@ void main() {
       'emits [LoadingState, FailedState] when Response.statusCode != 200',
       setUp: () => when(() => mockDio.get(any())).thenAnswer(
         (_) async => Response(
-          data: mockData,
+          data: mockJson,
           requestOptions: RequestOptions(),
           statusCode: HttpStatus.unauthorized,
         ),
@@ -66,7 +66,7 @@ void main() {
       setUp: () {
         when(() => mockDio.get(any())).thenAnswer(
           (_) async => Response(
-            data: mockData,
+            data: mockJson,
             requestOptions: RequestOptions(),
             statusCode: HttpStatus.ok,
           ),
@@ -85,7 +85,7 @@ void main() {
       setUp: () {
         when(() => mockDio.get(any())).thenAnswer(
           (_) async => Response(
-            data: mockData,
+            data: mockJson,
             requestOptions: RequestOptions(),
             statusCode: HttpStatus.ok,
           ),

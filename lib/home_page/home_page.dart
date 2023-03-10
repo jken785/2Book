@@ -16,6 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    const minSafeArea = EdgeInsets.all(8.0);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Business collection'),
@@ -23,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       body: CustomScrollView(
         slivers: [
           SliverSafeArea(
-            minimum: const EdgeInsets.all(8),
+            minimum: minSafeArea,
             sliver: SliverList(
               delegate: SliverChildListDelegate.fixed([
                 Padding(
@@ -39,7 +41,10 @@ class _HomePageState extends State<HomePage> {
               ]),
             ),
           ),
-          const BusinessSliverList(),
+          const SliverSafeArea(
+            minimum: minSafeArea,
+            sliver: BusinessSliverList(),
+          ),
         ],
       ),
     );
