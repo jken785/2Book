@@ -3,6 +3,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -20,15 +21,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final Dio _httpClient = getIt<Dio>();
 
   HomePageBloc() : super(const InitialState()) {
-    on<FetchEvent>(_handleFetchEvent);
-    on<FilterEvent>(_handleFilterEvent);
+    on<FetchEvent>(_handleFetchEvent, transformer: restartable());
+    on<FilterEvent>(_handleFilterEvent, transformer: restartable());
   }
 
   Future<void> _handleFetchEvent(event, emit) async {
-    if (state is LoadingState) {
-      return;
-    }
-
     emit(LoadingState(coordinate: event.coordinate));
 
     Response response;
